@@ -1,0 +1,127 @@
+﻿@using Entity.DTOs;
+@model JobDetailDto
+
+<!-- Banner Starts Here -->
+    <div class="heading-page header-text">
+      <section class="page-heading">
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-12">
+              <div class="text-content">
+                <h4>@Model.MinSalary - @Model.MaxSalary AZN</h4>
+                <h2>@Model.Name</h2>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- Banner Ends Here -->
+
+    <section class="blog-posts grid-system">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-8">
+            <div class="sidebar-item recent-posts">
+              <div class="sidebar-heading">
+                <h2>
+                 <i class="fa fa-map-marker"></i> @Model.City &nbsp;&nbsp;
+                 <i class="fa fa-calendar"></i> @Model.CreateDate.ToShortDateString() -  @Model.EndDate.ToShortDateString() &nbsp;&nbsp;
+                </h2>
+              </div>
+
+              <div class="content">
+               <strong>Təhsil -</strong>            @Model.Education<br />
+               <strong>İş təcrübəsi - </strong>     @Model.Experence<br />
+               <strong>Yaş -             </strong>  @Model.MinAge - @Model.MaxAge<br />
+              </div>
+            </div>
+
+            <br>
+
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="section contact-us">
+      <div class="container">
+        <div class="sidebar-item recent-posts">
+          <div class="sidebar-heading">
+            <h2>İş barədə məlumat</h2>
+          </div>
+
+          <div class="content">
+                @Model.JobInformation
+            </div>
+
+          <br>
+          <br>
+        </div>
+
+        <div class="row">
+          <div class="col-lg-8">
+            <div class="sidebar-item recent-posts">
+              <div class="sidebar-heading">
+                <h2>Namizədə tələblər</h2>
+              </div>
+
+              <div class="content">
+
+                      <p style="white-space: pre-line">
+                            @Model.Requirements
+
+                      </p>
+
+                      <form asp-controller="Job" asp-action="Add">
+                          <textarea name="description" id="description"></textarea>
+                          <button>Test</button>
+                      </form>
+
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-4">
+            <div class="sidebar-item recent-posts">
+              <div class="sidebar-heading">
+                <h2>Əlaqə məlumatları</h2>
+              </div>
+
+              <div class="content">
+                <p>
+                  <span>Əlaqədar şəxs</span>
+
+                  <br>
+
+                  <strong>@Model.Person</strong>
+                </p>
+
+                <p>
+                  <span>Əlaqə nömrəsi</span>
+
+                  <br>
+
+                  <strong>
+                    <a href="tel:@Model.PhoneNumber">@Model.PhoneNumber</a>
+                  </strong>
+                </p>
+
+                <p>
+                  <span>Email</span>
+
+                  <br>
+
+                  <strong>
+                    <a href="mailto:@Model.Email">@Model.Email</a>
+                  </strong>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+      </div>
+    </div>

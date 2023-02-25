@@ -1,0 +1,6 @@
+﻿Ef add
+AppDbContext
+Business and DataAccess write
+Create api
+
+Get vacancy by company name

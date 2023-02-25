@@ -1,0 +1,65 @@
+﻿@using Entity.DTOs;
+@model List<GetJobDto>
+
+
+ <div class="heading-page header-text">
+      <section class="page-heading">
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-12">
+              <div class="text-content">
+                <h4>İŞLƏR</h4>
+                <h2>MÜKƏMMƏL İŞİ SEÇİN!</h2>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+
+<section class="blog-posts grid-system">
+      <div class="container">
+        <div class="all-blog-posts">
+          <div class="row">
+
+                @await Component.InvokeAsync("Filter")
+
+
+
+
+            <div class="col-md-8 col-xs-12">
+              <div class="row">
+
+                        @foreach (var item in Model)
+                        {
+                             <div class="col-sm-6">
+                              <div class="blog-post">
+                                <div class="down-content">
+                                          <a asp-controller="Job" asp-action="Details" asp-route-id="@item.Id"><h4>@item.Name</h4></a>
+                                      <span>@item.MinSalary - @item.MaxSalary AZN</span>
+                                      <p>@item.CompanyName</p>
+                                      <input type="hidden" asp-for="@item.Id">
+                                  <div class="post-options">
+                                    <div class="row">
+                                      <div class="col-lg-12">
+                                        <ul class="post-tags">
+                                          <li><i class="fa fa-bullseye"></i></li>
+                                              <li><a asp-controller="Job" asp-action="Details" asp-route-id="@item.Id">Müraciət</a></li>
+                                        </ul>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                        }
+
+              </div>
+            </div>
+          </div>
+
+
+        </div>
+      </div>
+    </section>

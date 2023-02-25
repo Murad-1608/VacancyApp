@@ -1,0 +1,64 @@
+﻿@using Entity.DTOs;
+@model FilterDto
+
+<div class="col-md-4 col-xs-12">
+                <form action="#">
+                 <h5 style="margin-bottom: 15px">Tip</h5>     
+        <div> 
+            <select name="cars" id="cars" class="form-control">
+                @foreach (var item in Model.Types)
+                {
+                          <option value="saab">@item.Name</option>
+
+                } 
+                <option value="saab">-</option>
+
+              </select>
+        </div>
+
+
+                 <br>
+
+           <h5 style="margin-bottom: 15px">Kateqoriya</h5>     
+
+           <div> 
+              <select name="cars" id="cars" class="form-control">
+                @foreach (var item in Model.Types)
+                {
+                              <option value="saab">@item.Name</option>
+                } 
+               </select>
+           </div>
+
+
+           <br>
+
+           <h5 style="margin-bottom: 15px">İş təcrübəsi</h5>     
+
+           <div> 
+            <select name="cars" id="cars" class="form-control">
+                @foreach (var item in Model.Types)
+                {
+                        <option value="saab">@item.Name</option>
+                } 
+              </select>
+           </div>
+
+                <br />
+
+                 <h5 style="margin-bottom: 15px">Təhsil</h5>     
+
+           <div> 
+            <select name="cars" id="cars" class="form-control">
+                @foreach (var item in Model.Types)
+                {
+                       <option value="saab">@item.Name</option>
+                } 
+              </select>
+           </div>
+           <br />
+
+
+                     <button class="form-control">Axtar</button>
+                </form>
+ </div>
