@@ -15,27 +15,9 @@ namespace Business.Concrete
             this.jobDal = jobDal;
         }
 
-        public IDataResult<List<GetJobDto>> GetJobs()
+        public IDataResult<List<GetJobDto>> GetAll()
         {
-            var jobs = jobDal.GetAll();
-
-            List<GetJobDto> getJobDtos = new List<GetJobDto>();
-            foreach (var item in jobs)
-            {
-                GetJobDto getJobDto = new GetJobDto();
-
-                getJobDto.Id = item.Id;
-                getJobDto.Name = item.Name;
-                getJobDto.MinSalary = item.MinSalary;
-                getJobDto.MaxSalary = item.MaxSalary;
-                getJobDto.JobInformation = item.JobInformation;
-                getJobDto.CompanyName = item.CompanyName;
-                getJobDto.Id = item.Id;
-
-                getJobDtos.Add(getJobDto);
-            }
-
-            return new SuccessDataResult<List<GetJobDto>>(getJobDtos);
+            return new SuccessDataResult<List<GetJobDto>>(jobDal.GetJobsWithCity());
         }
 
         public IDataResult<JobDetailDto> JobDetail(int id)
@@ -46,29 +28,23 @@ namespace Business.Concrete
             return new SuccessDataResult<JobDetailDto>(value);
         }
 
-        public void Add()
+        public IDataResult<List<GetJobDto>> GetJobs(string Name)
         {
-            Job job = new Job();
-            job.MaxAge = 12;
-            job.MinAge = 23;
-            job.Requirements = "Test1 \n Test2";
-            job.CompanyName = "Nadir";
-            job.CategoryId = 1;
-            job.Person = "Murad";
-            job.MinSalary = 12;
-            job.MaxSalary = 12;
-            job.Name = "Name";
-            job.JobInformation = "dfdf";
-            job.Email = "dfdf";
-            job.CityId = 1;
-            job.EducationId = 1;
-            job.ExperienceId = 1;
-            job.JobTypeId = 1;
-            job.PhoneNumber = "vcvcv";
+            throw new NotImplementedException();
+        }
 
-            Console.WriteLine(job.Requirements);
+        public IDataResult<List<GetJobDto>> Filter(int typeId, int categoryId, int experienceId, int educationId, int cityId, string keywords)
+        {
+            var jobs = jobDal.GetJobsWithCity(x => x.JobTypeId == typeId ||
+                                                   x.SubCategoryId == categoryId ||
+                                                   x.ExperienceId == experienceId ||
+                                                   x.EducationId == educationId ||
+                                                   x.CityId == cityId ||
+                                                   x.Requirements.Contains(keywords) ||
+                                                   x.JobInformation.Contains(keywords) ||
+                                                   x.Name.Contains(keywords));
 
-            jobDal.Add(job);
+            return new SuccessDataResult<List<GetJobDto>>(jobs);
         }
     }
 }

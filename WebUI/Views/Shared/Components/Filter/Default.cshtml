@@ -2,16 +2,15 @@
 @model FilterDto
 
 <div class="col-md-4 col-xs-12">
-                <form action="#">
+      <form method="post" asp-controller="Job" asp-action="Filter">
                  <h5 style="margin-bottom: 15px">Tip</h5>     
         <div> 
-            <select name="cars" id="cars" class="form-control">
+            <select name="typeId" class="form-control">
+                <option>Vacib deyil</option>
                 @foreach (var item in Model.Types)
                 {
-                          <option value="saab">@item.Name</option>
-
+                        <option value="@item.Id">@item.Name</option>   
                 } 
-                <option value="saab">-</option>
 
               </select>
         </div>
@@ -22,12 +21,21 @@
            <h5 style="margin-bottom: 15px">Kateqoriya</h5>     
 
            <div> 
-              <select name="cars" id="cars" class="form-control">
-                @foreach (var item in Model.Types)
+               <select name="categoryId" class="form-control" >
+                <option >Vacib deyil</option>
+                   @foreach (var item in Model.Categories)
                 {
-                              <option value="saab">@item.Name</option>
-                } 
-               </select>
+                <optgroup label="@item.Name">
+                    @foreach (var subCategory in Model.SubCategories.Where(x=>x.CategoryId==item.Id).ToList())
+                        {
+                            <option value="@subCategory.Id">@subCategory.Name</option>
+                        }
+                    
+                </optgroup>
+                }
+                   
+                </select>
+
            </div>
 
 
@@ -36,10 +44,13 @@
            <h5 style="margin-bottom: 15px">İş təcrübəsi</h5>     
 
            <div> 
-            <select name="cars" id="cars" class="form-control">
-                @foreach (var item in Model.Types)
+            <select name="experienceId" class="form-control">
+                <option >Vacib deyil</option>               
+                @foreach (var item in Model.Experiences)
                 {
-                        <option value="saab">@item.Name</option>
+                        <option value="@item.Id">@item.Name</option>
+                        
+
                 } 
               </select>
            </div>
@@ -49,16 +60,37 @@
                  <h5 style="margin-bottom: 15px">Təhsil</h5>     
 
            <div> 
-            <select name="cars" id="cars" class="form-control">
-                @foreach (var item in Model.Types)
+            <select name="educationId"  class="form-control">
+                <option >Vacib deyil</option>
+                @foreach (var item in Model.Educations)
                 {
-                       <option value="saab">@item.Name</option>
+                       <option value="@item.Id">@item.Name</option>
+                } 
+              </select>
+           </div>
+
+                 <br />
+                 <h5 style="margin-bottom: 15px">Şəhər</h5>     
+
+           <div> 
+            <select name="cityId" class="form-control">
+                <option >Vacib deyil</option>
+                @foreach (var item in Model.Cities)
+                {
+                       <option value="@item.Id">@item.Name</option>
                 } 
               </select>
            </div>
            <br />
 
+           <h5 style="margin-bottom: 15px">Açar sözlər</h5>     
+
+           <div> 
+                <input name="keywords" type="text" class="form-control" />
+           </div>
+           <br />
 
                      <button class="form-control">Axtar</button>
-                </form>
+      </form>
+      <br />
  </div>

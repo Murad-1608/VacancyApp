@@ -20,7 +20,7 @@ namespace WebUI.Controllers
             //var jsonString = await responseMessage.Content.ReadAsStringAsync();
             //var values = JsonConvert.DeserializeObject<List<GetJobsModel>>(jsonString);
 
-            var values = jobService.GetJobs().Data;
+            var values = jobService.GetAll().Data;
 
             return View(values);
         }

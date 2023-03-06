@@ -3,8 +3,7 @@ using Entity.Concrete;
 
 namespace Business.Abstract
 {
-    public interface ITypeService
+    public interface ITypeService : IGenericService<JobType>
     {
-        IDataResult<List<JobType>> GetAll();
     }
 }

@@ -16,7 +16,7 @@ namespace WebAPI.Controllers
         [HttpGet("Get")]
         public List<GetJobDto> GetAll()
         {
-            return jobService.GetJobs().Data;
+            return jobService.GetAll().Data;
         }
     }
 }

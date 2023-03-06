@@ -4,7 +4,7 @@
     {
         public string Name { get; set; }
         public string CompanyName { get; set; }
-        public int CategoryId { get; set; } 
+        public int SubCategoryId { get; set; } 
         public int EducationId { get; set; }
         public string Person { get; set; }
         public double MinSalary { get; set; }
@@ -18,12 +18,14 @@
         public byte MaxAge { get; set; }
         public string Email { get; set; }
         public string PhoneNumber { get; set; }
+        public bool IsActive { get; set; }
+        public bool IsPremium { get; set; }
         public DateTime CreateDate { get; set; }
         public DateTime EndDate { get; set; }
 
 
         public City City { get; set; }
-        public Category Category { get; set; }
+        public SubCategory SubCategory { get; set; }
         public Education Education { get; set; }
         public Experience Experience { get; set; }
         public JobType JobType { get; set; }

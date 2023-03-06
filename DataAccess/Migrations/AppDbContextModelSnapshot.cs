@@ -98,9 +98,6 @@ namespace DataAccess.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("CategoryId")
-                        .HasColumnType("int");
-
                     b.Property<int>("CityId")
                         .HasColumnType("int");
 
@@ -123,6 +120,12 @@ namespace DataAccess.Migrations
 
                     b.Property<int>("ExperienceId")
                         .HasColumnType("int");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsPremium")
+                        .HasColumnType("bit");
 
                     b.Property<string>("JobInformation")
                         .IsRequired()
@@ -159,9 +162,10 @@ namespace DataAccess.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("Id");
+                    b.Property<int>("SubCategoryId")
+                        .HasColumnType("int");
 
-                    b.HasIndex("CategoryId");
+                    b.HasKey("Id");
 
                     b.HasIndex("CityId");
 
@@ -171,7 +175,73 @@ namespace DataAccess.Migrations
 
                     b.HasIndex("JobTypeId");
 
+                    b.HasIndex("SubCategoryId");
+
                     b.ToTable("Jobs");
+                });
+
+            modelBuilder.Entity("Entity.Concrete.JobSeeker", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("About")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Age")
+                        .HasColumnType("int");
+
+                    b.Property<int>("CategoryId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("CityId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("CreateDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Education")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("EndDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("ExperienceId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PhoneNumber")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<double>("Salary")
+                        .HasColumnType("float");
+
+                    b.Property<string>("Skills")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CategoryId");
+
+                    b.HasIndex("CityId");
+
+                    b.HasIndex("ExperienceId");
+
+                    b.ToTable("JobSeekers");
                 });
 
             modelBuilder.Entity("Entity.Concrete.JobType", b =>
@@ -191,14 +261,30 @@ namespace DataAccess.Migrations
                     b.ToTable("JobTypes");
                 });
 
+            modelBuilder.Entity("Entity.Concrete.SubCategory", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("CategoryId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CategoryId");
+
+                    b.ToTable("SubCategories");
+                });
+
             modelBuilder.Entity("Entity.Concrete.Job", b =>
                 {
-                    b.HasOne("Entity.Concrete.Category", "Category")
-                        .WithMany()
-                        .HasForeignKey("CategoryId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("Entity.Concrete.City", "City")
                         .WithMany()
                         .HasForeignKey("CityId")
@@ -223,7 +309,11 @@ namespace DataAccess.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Category");
+                    b.HasOne("Entity.Concrete.SubCategory", "SubCategory")
+                        .WithMany()
+                        .HasForeignKey("SubCategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("City");
 
@@ -232,6 +322,51 @@ namespace DataAccess.Migrations
                     b.Navigation("Experience");
 
                     b.Navigation("JobType");
+
+                    b.Navigation("SubCategory");
+                });
+
+            modelBuilder.Entity("Entity.Concrete.JobSeeker", b =>
+                {
+                    b.HasOne("Entity.Concrete.Category", "Category")
+                        .WithMany()
+                        .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Entity.Concrete.City", "City")
+                        .WithMany()
+                        .HasForeignKey("CityId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Entity.Concrete.Experience", "Experience")
+                        .WithMany()
+                        .HasForeignKey("ExperienceId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Category");
+
+                    b.Navigation("City");
+
+                    b.Navigation("Experience");
+                });
+
+            modelBuilder.Entity("Entity.Concrete.SubCategory", b =>
+                {
+                    b.HasOne("Entity.Concrete.Category", "Category")
+                        .WithMany("Categories")
+                        .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Category");
+                });
+
+            modelBuilder.Entity("Entity.Concrete.Category", b =>
+                {
+                    b.Navigation("Categories");
                 });
 #pragma warning restore 612, 618
         }

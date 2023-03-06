@@ -8,7 +8,7 @@ namespace Entity.DTOs
         public string Name { get; set; }
         public double MinSalary { get; set; }
         public double MaxSalary { get; set; }
-        public string JobInformation { get; set; }
         public string CompanyName { get; set; }
+        public string CityName { get; set; }
     }
 }

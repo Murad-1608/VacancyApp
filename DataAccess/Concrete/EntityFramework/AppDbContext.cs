@@ -16,5 +16,7 @@ namespace DataAccess.Concrete.EntityFramework
         public DbSet<Experience> Experiences { get; set; }
         public DbSet<Category> Categories { get; set; }
         public DbSet<JobType> JobTypes { get; set; }
+        public DbSet<SubCategory> SubCategories { get; set; }
+        public DbSet<JobSeeker> JobSeekers { get; set; }
     }
 }
