@@ -1,10 +1,8 @@
-﻿using Core.Utilities.Results;
-using Entity.Concrete;
+﻿using Entity.Concrete;
 
 namespace Business.Abstract
 {
-    public interface ICategoryService
+    public interface ICategoryService : IGenericService<Category>
     {
-        IDataResult<List<Category>> GetAll();
     }
 }

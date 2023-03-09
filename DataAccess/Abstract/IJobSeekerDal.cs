@@ -7,6 +7,6 @@ namespace DataAccess.Abstract
 {
     public interface IJobSeekerDal : IRepositoryBase<JobSeeker>
     {
-        List<GetJobSeekersDto> GetJobSeekerWithCity(Expression<Func<Job, bool>> filter = null);
+        List<GetJobSeekersDto> GetJobSeekerWithCity(Expression<Func<JobSeeker, bool>> filter = null);
     }
 }

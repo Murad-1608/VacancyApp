@@ -9,7 +9,7 @@ namespace DataAccess.Concrete.EntityFramework
 {
     public class JobSeekerDal : EfRepositoryBase<JobSeeker, AppDbContext>, IJobSeekerDal
     {
-        public List<GetJobSeekersDto> GetJobSeekerWithCity(Expression<Func<Job, bool>> filter = null)
+        public List<GetJobSeekersDto> GetJobSeekerWithCity(Expression<Func<JobSeeker, bool>> filter = null)
         {
             using (AppDbContext context = new())
             {

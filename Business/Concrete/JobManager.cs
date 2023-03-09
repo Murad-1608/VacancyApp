@@ -1,9 +1,11 @@
 ﻿using Business.Abstract;
+using Business.ValidationRules.FluentValidation;
+using Core.Aspects.Autofac.Validation;
+using Core.CrossCuttingConcerns.Validation;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
-using Entity.Concrete;
 using Entity.DTOs;
-using static Azure.Core.HttpHeader;
+using FluentValidation;
 
 namespace Business.Concrete
 {
@@ -45,6 +47,14 @@ namespace Business.Concrete
                                                    x.Name.Contains(keywords));
 
             return new SuccessDataResult<List<GetJobDto>>(jobs);
+        }
+
+        [ValidationAspect(typeof(JobValidator))]
+        public IResult Add(AddJobDto jobDto)
+        {
+            ValidationTool.Validate(new JobValidator(), jobDto);
+
+            return new SuccessResult("Ugurla");
         }
     }
 }

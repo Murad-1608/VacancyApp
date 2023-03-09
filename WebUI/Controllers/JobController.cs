@@ -39,5 +39,10 @@ namespace WebUI.Controllers
 
             return View(jobs);
         }
+
+        public IActionResult Add()
+        {
+            return View();
+        }
     }
 }
