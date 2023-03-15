@@ -1,6 +1,6 @@
 ﻿namespace Entity.DTOs
 {
-    public class GetJobSeekersDto
+    public class JobSeekersDto
     {
         public int Id { get; set; }
         public string Name { get; set; }

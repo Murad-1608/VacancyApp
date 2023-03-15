@@ -1,9 +1,9 @@
-﻿using Entity.DTOs;
+﻿using Entity.Concrete;
 using FluentValidation;
 
 namespace Business.ValidationRules.FluentValidation
 {
-    public class JobValidator : AbstractValidator<AddJobDto>
+    public class JobValidator : AbstractValidator<Job>
     {
         public JobValidator()
         {

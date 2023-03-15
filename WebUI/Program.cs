@@ -1,5 +1,5 @@
-using Autofac.Extensions.DependencyInjection;
 using Autofac;
+using Autofac.Extensions.DependencyInjection;
 using Business.DependencyResolvers.Autofac;
 using DataAccess.Concrete.EntityFramework;
 

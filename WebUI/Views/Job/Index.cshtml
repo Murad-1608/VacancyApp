@@ -31,11 +31,15 @@
 
                 @await Component.InvokeAsync("Filter")
 
+
+                
                 <div class="col-md-8 col-xs-12">
+
                     <a class="btn btn-primary" style="float:right" asp-controller="Job" asp-action="Add">Yeni vakansiya yaradın</a>
                     <br />
-
                     <div class="row">
+                        
+
                         @foreach (var item in Model)
                         {
                             <div class="col-sm-6">

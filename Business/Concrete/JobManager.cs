@@ -4,6 +4,7 @@ using Core.Aspects.Autofac.Validation;
 using Core.CrossCuttingConcerns.Validation;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
+using Entity.Concrete;
 using Entity.DTOs;
 using FluentValidation;
 
@@ -50,9 +51,9 @@ namespace Business.Concrete
         }
 
         [ValidationAspect(typeof(JobValidator))]
-        public IResult Add(AddJobDto jobDto)
+        public IResult Add(Job job)
         {
-            ValidationTool.Validate(new JobValidator(), jobDto);
+            ValidationTool.Validate(new JobValidator(), job);
 
             return new SuccessResult("Ugurla");
         }

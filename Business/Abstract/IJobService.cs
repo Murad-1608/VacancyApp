@@ -1,4 +1,5 @@
 ﻿using Core.Utilities.Results;
+using Entity.Concrete;
 using Entity.DTOs;
 
 namespace Business.Abstract
@@ -8,6 +9,6 @@ namespace Business.Abstract
         IDataResult<JobDetailDto> JobDetail(int id);
         IDataResult<List<GetJobDto>> GetJobs(string Name);
         IDataResult<List<GetJobDto>> Filter(int typeId, int categoryId, int experienceId, int educationId, int cityId, string keywords);
-        IResult Add(AddJobDto jobDto);
+        IResult Add(Job job);
     }
 }
