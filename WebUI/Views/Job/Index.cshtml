@@ -15,6 +15,7 @@
                     <div class="text-content">
                         <h4>İŞLƏR</h4>
                         <h2>MÜKƏMMƏL İŞİ SEÇİN!</h2>
+                        <h5 style="color:white">Ümumi @ViewBag.VacancyCount iş elanı</h5>
                     </div>
                 </div>
             </div>
@@ -26,19 +27,16 @@
 
 <section class="blog-posts grid-system">
     <div class="container">
-        <div class="all-blog-posts">            
+        <div class="all-blog-posts">
             <div class="row">
 
                 @await Component.InvokeAsync("Filter")
 
 
-                
-                <div class="col-md-8 col-xs-12">
 
-                    <a class="btn btn-primary" style="float:right" asp-controller="Job" asp-action="Add">Yeni vakansiya yaradın</a>
-                    <br />
+                <div class="col-md-8 col-xs-12">
                     <div class="row">
-                        
+
 
                         @foreach (var item in Model)
                         {
@@ -46,7 +44,14 @@
                                 <div class="blog-post">
                                     <div class="down-content">
                                         <a asp-controller="Job" asp-action="Details" asp-route-id="@item.Id"><h4>@item.Name</h4></a>
-                                        <span>@item.MinSalary - @item.MaxSalary AZN</span><br>
+                                        @if (item.MinSalary == item.MaxSalary)
+                                        {
+                                            <span>@item.MinSalary AZN</span><br>
+                                        }
+                                        else
+                                        {
+                                            <span>@item.MinSalary - @item.MaxSalary AZN</span><br>
+                                        }
                                         <p>
                                             <i class='fas fa-building'></i> @item.CompanyName<br />
 
@@ -70,6 +75,8 @@
                         }
                     </div>
                     <br />
+
+
 
                     @if (Model.Count != 0)
                     {

@@ -131,26 +131,19 @@ namespace DataAccess.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("JobTypeId")
-                        .HasColumnType("int");
-
                     b.Property<byte>("MaxAge")
                         .HasColumnType("tinyint");
 
-                    b.Property<double>("MaxSalary")
+                    b.Property<double?>("MaxSalary")
                         .HasColumnType("float");
 
                     b.Property<byte>("MinAge")
                         .HasColumnType("tinyint");
 
-                    b.Property<double>("MinSalary")
+                    b.Property<double?>("MinSalary")
                         .HasColumnType("float");
 
                     b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Person")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -172,8 +165,6 @@ namespace DataAccess.Migrations
                     b.HasIndex("EducationId");
 
                     b.HasIndex("ExperienceId");
-
-                    b.HasIndex("JobTypeId");
 
                     b.HasIndex("SubCategoryId");
 
@@ -218,6 +209,9 @@ namespace DataAccess.Migrations
                     b.Property<int>("ExperienceId")
                         .HasColumnType("int");
 
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -242,23 +236,6 @@ namespace DataAccess.Migrations
                     b.HasIndex("ExperienceId");
 
                     b.ToTable("JobSeekers");
-                });
-
-            modelBuilder.Entity("Entity.Concrete.JobType", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("JobTypes");
                 });
 
             modelBuilder.Entity("Entity.Concrete.SubCategory", b =>
@@ -303,12 +280,6 @@ namespace DataAccess.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Entity.Concrete.JobType", "JobType")
-                        .WithMany()
-                        .HasForeignKey("JobTypeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("Entity.Concrete.SubCategory", "SubCategory")
                         .WithMany()
                         .HasForeignKey("SubCategoryId")
@@ -320,8 +291,6 @@ namespace DataAccess.Migrations
                     b.Navigation("Education");
 
                     b.Navigation("Experience");
-
-                    b.Navigation("JobType");
 
                     b.Navigation("SubCategory");
                 });

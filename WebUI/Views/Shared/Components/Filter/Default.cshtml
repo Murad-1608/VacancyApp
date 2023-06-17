@@ -2,95 +2,78 @@
 @model FilterDto
 
 <div class="col-md-4 col-xs-12">
-      <form method="post" asp-controller="Job" asp-action="Filter">
-                 <h5 style="margin-bottom: 15px">Tip</h5>     
-        <div> 
-            <select name="typeId" class="form-control">
+    <form method="post" asp-controller="Job" asp-action="Filter">
+
+        <h5 style="margin-bottom: 15px">Kateqoriya</h5>
+
+        <div>
+            <select name="categoryId" class="form-control">
                 <option>Vacib deyil</option>
-                @foreach (var item in Model.Types)
+                @foreach (var item in Model.Categories)
                 {
-                        <option value="@item.Id">@item.Name</option>   
-                } 
-
-              </select>
-        </div>
-
-
-                 <br>
-
-           <h5 style="margin-bottom: 15px">Kateqoriya</h5>     
-
-           <div> 
-               <select name="categoryId" class="form-control" >
-                <option >Vacib deyil</option>
-                   @foreach (var item in Model.Categories)
-                {
-                <optgroup label="@item.Name">
-                    @foreach (var subCategory in Model.SubCategories.Where(x=>x.CategoryId==item.Id).ToList())
+                    <optgroup label="@item.Name">
+                        @foreach (var subCategory in Model.SubCategories.Where(x => x.CategoryId == item.Id).ToList())
                         {
                             <option value="@subCategory.Id">@subCategory.Name</option>
                         }
-                    
-                </optgroup>
+
+                    </optgroup>
                 }
-                   
-                </select>
 
-           </div>
+            </select>
 
+        </div>
+        <br>
+        <h5 style="margin-bottom: 15px">İş təcrübəsi</h5>
 
-           <br>
-
-           <h5 style="margin-bottom: 15px">İş təcrübəsi</h5>     
-
-           <div> 
+        <div>
             <select name="experienceId" class="form-control">
-                <option >Vacib deyil</option>               
+                <option>Vacib deyil</option>
                 @foreach (var item in Model.Experiences)
                 {
-                        <option value="@item.Id">@item.Name</option>
-                        
+                    <option value="@item.Id">@item.Name</option>
 
-                } 
-              </select>
-           </div>
 
-                <br />
+                }
+            </select>
+        </div>
 
-                 <h5 style="margin-bottom: 15px">Təhsil</h5>     
+        <br />
 
-           <div> 
-            <select name="educationId"  class="form-control">
-                <option >Vacib deyil</option>
+        <h5 style="margin-bottom: 15px">Təhsil</h5>
+
+        <div>
+            <select name="educationId" class="form-control">
+                <option>Vacib deyil</option>
                 @foreach (var item in Model.Educations)
                 {
-                       <option value="@item.Id">@item.Name</option>
-                } 
-              </select>
-           </div>
+                    <option value="@item.Id">@item.Name</option>
+                }
+            </select>
+        </div>
 
-                 <br />
-                 <h5 style="margin-bottom: 15px">Şəhər</h5>     
+        <br />
+        <h5 style="margin-bottom: 15px">Şəhər</h5>
 
-           <div> 
+        <div>
             <select name="cityId" class="form-control">
-                <option >Vacib deyil</option>
+                <option>Vacib deyil</option>
                 @foreach (var item in Model.Cities)
                 {
-                       <option value="@item.Id">@item.Name</option>
-                } 
-              </select>
-           </div>
-           <br />
+                    <option value="@item.Id">@item.Name</option>
+                }
+            </select>
+        </div>
+        <br />
 
-           <h5 style="margin-bottom: 15px">Açar sözlər</h5>     
+        <h5 style="margin-bottom: 15px">Açar sözlər</h5>
 
-           <div> 
-                <input name="keywords" type="text" class="form-control" />
-           </div>
-           <br />
+        <div>
+            <input name="keywords" type="text" class="form-control" />
+        </div>
+        <br />
 
-                     <button class="form-control">Axtar</button>
-      </form>
-      <br />
- </div>
+        <button class="form-control">Axtar</button>
+    </form>
+    <br />
+</div>

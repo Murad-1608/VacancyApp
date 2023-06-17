@@ -13,9 +13,21 @@ namespace Business.Concrete
             this.subCategoryDal = subCategoryDal;
         }
 
+        public IResult Add(SubCategory value)
+        {
+            subCategoryDal.Add(value);
+
+            return new SuccessResult();
+        }
+
         public IDataResult<List<SubCategory>> GetAll()
         {
             return new SuccessDataResult<List<SubCategory>>(subCategoryDal.GetAll());
+        }
+
+        public IDataResult<SubCategory> GetByName(string name)
+        {
+            return new SuccessDataResult<SubCategory>(subCategoryDal.Get(x => x.Name == name));
         }
     }
 }

@@ -2,6 +2,7 @@ using Autofac;
 using Autofac.Extensions.DependencyInjection;
 using Business.DependencyResolvers.Autofac;
 using DataAccess.Concrete.EntityFramework;
+using WebUI.Helper;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,6 +11,7 @@ builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory())
     {
         builder.RegisterModule(new AutofacBusinessModule());
     });
+builder.Services.AddAutoMapper(typeof(MapperProfile));
 
 builder.Services.AddDbContext<AppDbContext>();
 

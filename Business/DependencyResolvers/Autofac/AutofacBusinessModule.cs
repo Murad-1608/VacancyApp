@@ -16,9 +16,6 @@ namespace Business.DependencyResolvers.Autofac
             builder.RegisterType<JobManager>().As<IJobService>().SingleInstance();
             builder.RegisterType<JobDal>().As<IJobDal>().SingleInstance();
 
-            builder.RegisterType<TypeManager>().As<ITypeService>().SingleInstance();
-            builder.RegisterType<TypeDal>().As<ITypeDal>().SingleInstance();
-
             builder.RegisterType<CategoryManager>().As<ICategoryService>().SingleInstance();
             builder.RegisterType<CategoryDal>().As<ICategoryDal>().SingleInstance();
 

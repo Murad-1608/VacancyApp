@@ -1,4 +1,5 @@
-﻿using Business.Abstract;
+﻿using AutoMapper;
+using Business.Abstract;
 using Entity.Concrete;
 using Entity.DTOs;
 using Microsoft.AspNetCore.Mvc;
@@ -17,8 +18,13 @@ namespace WebUI.Controllers
         private readonly IExperienceService experienceService;
         private readonly ICityService cityService;
         private readonly IEducationService educationService;
-        private readonly ITypeService typeService;
-        public JobController(IJobService jobService, ICategoryService categoryService, ISubCategoryService subCategoryService, IExperienceService experienceService, ICityService cityService, IEducationService educationService, ITypeService typeService)
+        private readonly IMapper mapper;
+        public JobController(IJobService jobService, ICategoryService categoryService,
+                            ISubCategoryService subCategoryService,
+                            IExperienceService experienceService,
+                            ICityService cityService,
+                            IEducationService educationService,
+                            IMapper mapper = null)
         {
             this.jobService = jobService;
             this.categoryService = categoryService;
@@ -26,7 +32,7 @@ namespace WebUI.Controllers
             this.experienceService = experienceService;
             this.cityService = cityService;
             this.educationService = educationService;
-            this.typeService = typeService;
+            this.mapper = mapper;
         }
         public IActionResult Index(int page = 1)
         {
@@ -34,8 +40,10 @@ namespace WebUI.Controllers
             //var responseMessage = await httpClient.GetAsync("https://localhost:44311/api/Jobs/Get");
             //var jsonString = await responseMessage.Content.ReadAsStringAsync();
             //var values = JsonConvert.DeserializeObject<List<GetJobsModel>>(jsonString);
+            var vacancies = jobService.GetAll().Data;
 
-            var values = jobService.GetAll().Data.ToPagedList(page, 6);
+            ViewBag.VacancyCount = vacancies.Count;
+            var values = vacancies.ToPagedList(page, 6);
 
             return View(values);
         }
@@ -58,26 +66,30 @@ namespace WebUI.Controllers
 
         [HttpGet]
         public IActionResult Add()
-        {            
-            return View(JobViewModel());
+        {
+            return View(JobViewModel(null));
         }
 
 
         [HttpPost]
-        public IActionResult Add(AddJobDto value)
+        public IActionResult Add(JobViewModel viewModel)
         {
+            //viewModel = JobViewModel(viewModel.AddJobDto);
 
             //if (ModelState.IsValid)
             //{
-            //    jobService.Add(value);
+            //    Job job = mapper.Map<Job>(viewModel.AddJobDto);
+
+            //    string message = jobService.Add(job).Message;
+
+            //    return View();
             //}
-            
             return View();
 
-            
+
         }
 
-        private JobViewModel JobViewModel()
+        private JobViewModel JobViewModel(AddJobDto dto)
         {
             List<Category> categories = categoryService.GetAll().Data;
 
@@ -104,12 +116,7 @@ namespace WebUI.Controllers
                                                   Value = i.Id.ToString()
                                               }).ToList();
 
-            List<SelectListItem> type = (from i in typeService.GetAll().Data.ToList()
-                                         select new SelectListItem
-                                         {
-                                             Text = i.Name,
-                                             Value = i.Id.ToString()
-                                         }).ToList();
+
 
             JobViewModel viewmodel = new JobViewModel()
             {
@@ -118,7 +125,6 @@ namespace WebUI.Controllers
                 SubCategories = subCategories,
                 Cities = city,
                 Educations = education,
-                JobTypes = type
             };
 
             return viewmodel;

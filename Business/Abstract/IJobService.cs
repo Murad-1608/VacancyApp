@@ -9,6 +9,7 @@ namespace Business.Abstract
         IDataResult<JobDetailDto> JobDetail(int id);
         IDataResult<List<GetJobDto>> GetJobs(string Name);
         IDataResult<List<GetJobDto>> Filter(int typeId, int categoryId, int experienceId, int educationId, int cityId, string keywords);
-        IResult Add(Job job);
+        IResult AddJob(Job job);
+        IResult DeleteAll();
     }
 }

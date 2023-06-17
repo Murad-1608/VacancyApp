@@ -6,7 +6,6 @@ namespace Entity.DTOs
     {
         public int Id { get; set; }
         public string City { get; set; }
-        public string Person { get; set; }
         public string Name { get; set; }
         public string JobInformation { get; set; }
         public string Requirements { get; set; }

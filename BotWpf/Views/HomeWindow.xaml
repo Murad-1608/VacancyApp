@@ -1,0 +1,30 @@
+﻿<Window x:Class="WebBot.Views.HomeWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WebBot.Views"
+        mc:Ignorable="d"
+        Title="HomeWindow" Height="450" Width="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <ComboBox VerticalAlignment="Top" HorizontalAlignment="Left" Height="25" Width="200" Margin="20">
+            <TextBlock>Boss.az</TextBlock>
+        </ComboBox>
+
+        <Button Command="{Binding GetDataCommand}" VerticalAlignment="Bottom" HorizontalAlignment="Left" Height="25" Width="200" Margin="20,0,10,10" Grid.Row="0">Dataları gətir</Button>
+
+
+        <TextBlock Text="{Binding GetValueCount}"  VerticalAlignment="Top" HorizontalAlignment="Left" Height="25" Width="120" Margin="20,0,10,10" Grid.Row="1"></TextBlock>
+
+        <Button Command="{Binding DeleteAllValuesCommand}" VerticalAlignment="Center" HorizontalAlignment="Left" Height="25" Width="200" Margin="20,0,10,10" Grid.Row="1">Verilənlər bazasını sıfırla</Button>
+
+    </Grid>
+</Window>

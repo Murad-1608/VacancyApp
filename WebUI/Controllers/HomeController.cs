@@ -22,6 +22,10 @@ namespace WebUI.Controllers
 
             var values = jobService.GetAll().Data;
 
+            if (values.Count == 0)
+            {
+                return RedirectToAction("index", "job");
+            }
             return View(values);
         }
     }

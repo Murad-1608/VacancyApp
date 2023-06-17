@@ -30,45 +30,53 @@
                 @await Component.InvokeAsync("Filter")
 
                 <div class="col-md-8 col-xs-12">
-                    <div class="row">
-                        @foreach (var item in Model)
-                        {
-                            <div class="col-sm-6">
-                                <div class="blog-post">
-                                    <div class="down-content">
-                                        <a asp-controller="Job" asp-action="Details" asp-route-id="@item.Id"><h4>@item.Name</h4></a>
-                                        <span>@item.MinSalary - @item.MaxSalary AZN</span><br>
-                                        <p>
-                                            <i class='fas fa-building'></i> @item.CompanyName<br />
+                    @if (Model.Count == 0)
+                    {
+                        <h3>Belə bir vakansiya mövcud deyil</h3>
+                    }
+                    else
+                    {
+                        <div class="row">
+                            @foreach (var item in Model)
+                            {
+                                <div class="col-sm-6">
+                                    <div class="blog-post">
+                                        <div class="down-content">
+                                            <a asp-controller="Job" asp-action="Details" asp-route-id="@item.Id"><h4>@item.Name</h4></a>
+                                            <span>@item.MinSalary - @item.MaxSalary AZN</span><br>
+                                            <p>
+                                                <i class='fas fa-building'></i> @item.CompanyName<br />
 
-                                            <i class='fas fa-map-marker-alt'></i> @item.CityName
+                                                <i class='fas fa-map-marker-alt'></i> @item.CityName
 
-                                        </p>
-                                        <input type="hidden" asp-for="@item.Id">
-                                        <div class="post-options">
-                                            <div class="row">
-                                                <div class="col-lg-12">
-                                                    <ul class="post-tags">
-                                                        <li><i class="fa fa-bullseye"></i></li>
-                                                        <li><a asp-controller="Job" asp-action="Details" asp-route-id="@item.Id">Müraciət</a></li>
-                                                    </ul>
+                                            </p>
+                                            <input type="hidden" asp-for="@item.Id">
+                                            <div class="post-options">
+                                                <div class="row">
+                                                    <div class="col-lg-12">
+                                                        <ul class="post-tags">
+                                                            <li><i class="fa fa-bullseye"></i></li>
+                                                            <li><a asp-controller="Job" asp-action="Details" asp-route-id="@item.Id">Müraciət</a></li>
+                                                        </ul>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                        }
+                            }
 
-                    </div>
-                    <br />
+                        </div>
+                        <br />
 
-                    @Html.PagedListPager((IPagedList)Model, page => Url.Action("Index", new { page }),
-                                                new PagedListRenderOptions
-                                                     {
-                                                LiElementClasses = new string[] { "page-item" },
-                                                PageClasses = new string[] { "page-link" }
-                                                     })
+                        @Html.PagedListPager((IPagedList)Model, page => Url.Action("Index", new { page }),
+                                                    new PagedListRenderOptions
+                                                         {
+                                                    LiElementClasses = new string[] { "page-item" },
+                                                    PageClasses = new string[] { "page-link" }
+                                                         })
+                    }
+
                 </div>
             </div>
 

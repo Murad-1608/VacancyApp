@@ -14,7 +14,7 @@ namespace DataAccess.Concrete.EntityFramework
         {
             using (AppDbContext context = new AppDbContext())
             {
-                var value = context.Jobs.Include(x => x.City).Include(x => x.SubCategory).Include(x => x.Education).Include(x => x.Experience).Include(x => x.JobType).FirstOrDefault(x => x.Id == id);
+                var value = context.Jobs.Include(x => x.City).Include(x => x.SubCategory).Include(x => x.Education).Include(x => x.Experience).FirstOrDefault(x => x.Id == id);
 
 
                 return new JobDetailDto()
@@ -28,15 +28,13 @@ namespace DataAccess.Concrete.EntityFramework
                     PhoneNumber = value.PhoneNumber,
                     MinAge = value.MinAge,
                     MaxAge = value.MaxAge,
-                    MinSalary = value.MinSalary,
-                    MaxSalary = value.MaxSalary,
+                    MinSalary = Convert.ToDouble(value.MinSalary),
+                    MaxSalary = Convert.ToDouble(value.MaxSalary),
                     Experence = value.Experience.Name,
                     CreateDate = value.CreateDate,
                     EndDate = value.EndDate,
-                    Person = value.Person,
                     CompanyName = value.CompanyName,
                     Education = value.Education.Name,
-                    TypeJob = value.JobType.Name
                 };
             }
         }
@@ -56,8 +54,8 @@ namespace DataAccess.Concrete.EntityFramework
                         Id = item.Id,
                         Name = item.Name,
                         CompanyName = item.CompanyName,
-                        MaxSalary = item.MaxSalary,
-                        MinSalary = item.MinSalary,
+                        MaxSalary = Convert.ToDouble(item.MaxSalary),
+                        MinSalary = Convert.ToDouble(item.MinSalary),
                         CityName = item.City.Name
                     };
                     getJobDtos.Add(getJobDto);

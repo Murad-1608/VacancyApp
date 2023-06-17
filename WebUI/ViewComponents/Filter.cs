@@ -6,15 +6,13 @@ namespace WebUI.ViewComponents
 {
     public class Filter : ViewComponent
     {
-        private readonly ITypeService typeService;
         private readonly ICategoryService categoryService;
         private readonly IExperienceService experienceService;
         private readonly ISubCategoryService subCategoryService;
         private readonly ICityService cityService;
         private readonly IEducationService educationService;
-        public Filter(ITypeService typeService, ICategoryService categoryService, IExperienceService experienceService, ISubCategoryService subCategoryService, ICityService cityService, IEducationService educationService)
+        public Filter(ICategoryService categoryService, IExperienceService experienceService, ISubCategoryService subCategoryService, ICityService cityService, IEducationService educationService)
         {
-            this.typeService = typeService;
             this.categoryService = categoryService;
             this.experienceService = experienceService;
             this.subCategoryService = subCategoryService;
@@ -26,7 +24,6 @@ namespace WebUI.ViewComponents
         {
             FilterDto filterDto = new FilterDto();
 
-            filterDto.Types = typeService.GetAll().Data;
             filterDto.Categories = categoryService.GetAll().Data;
             filterDto.Experiences = experienceService.GetAll().Data;
             filterDto.SubCategories = subCategoryService.GetAll().Data;

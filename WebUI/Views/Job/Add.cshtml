@@ -41,6 +41,20 @@
                                             </div>
                                             <div class="col-md-6 col-sm-12">
                                                 <fieldset>
+                                                    <label asp-for="AddJobDto.Email">Email</label>
+                                                    <input asp-for="AddJobDto.Email" type="text" id="name" required="">
+                                                    <span asp-validation-for="AddJobDto.Email" class="text-danger"></span>
+                                                </fieldset>
+                                            </div>
+                                            <div class="col-md-6 col-sm-12">
+                                                <fieldset>
+                                                    <label asp-for="AddJobDto.PhoneNumber">Telefon</label>
+                                                    <input asp-for="AddJobDto.PhoneNumber" type="text" id="name" required="">
+                                                    <span asp-validation-for="AddJobDto.PhoneNumber" class="text-danger"></span>
+                                                </fieldset>
+                                            </div>
+                                            <div class="col-md-6 col-sm-12">
+                                                <fieldset>
                                                     <label asp-for="AddJobDto.CompanyName">Şirkətin adı</label>
                                                     <input asp-for="AddJobDto.CompanyName" type="text" id="email" required="">
                                                     <span asp-validation-for="AddJobDto.CompanyName" class="text-danger"></span>

@@ -5,6 +5,7 @@ namespace Business.Abstract
 {
     public interface ISubCategoryService : IGenericService<SubCategory>
     {
+        IDataResult<SubCategory> GetByName(string name);
     }
 
 }

@@ -4,3 +4,13 @@ Business and DataAccess write
 Create api
 
 Get vacancy by company name
+
+
+
+Fluent validation and aspect is waiting
+
+
+
+Maas minimum maksimumda eynidirse birini goster
+
+enddate'de problem

@@ -38,8 +38,7 @@ namespace Business.Concrete
 
         public IDataResult<List<GetJobDto>> Filter(int typeId, int categoryId, int experienceId, int educationId, int cityId, string keywords)
         {
-            var jobs = jobDal.GetJobsWithCity(x => x.JobTypeId == typeId ||
-                                                   x.SubCategoryId == categoryId ||
+            var jobs = jobDal.GetJobsWithCity(x => x.SubCategoryId == categoryId ||
                                                    x.ExperienceId == experienceId ||
                                                    x.EducationId == educationId ||
                                                    x.CityId == cityId ||
@@ -50,12 +49,35 @@ namespace Business.Concrete
             return new SuccessDataResult<List<GetJobDto>>(jobs);
         }
 
-        [ValidationAspect(typeof(JobValidator))]
-        public IResult Add(Job job)
+        //[ValidationAspect(typeof(JobValidator))]
+        public IResult Add(Job value)
         {
-            ValidationTool.Validate(new JobValidator(), job);
+            jobDal.Add(value);
 
             return new SuccessResult("Ugurla");
+        }
+
+        public IResult Add(GetJobDto value)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IResult AddJob(Job job)
+        {
+            jobDal.Add(job);
+
+            return new SuccessResult();
+        }
+
+        public IResult DeleteAll()
+        {
+            List<Job> jobs = jobDal.GetAll();
+
+            foreach (Job job in jobs)
+            {
+                jobDal.Delete(job);
+            }
+            return new SuccessResult();
         }
     }
 }

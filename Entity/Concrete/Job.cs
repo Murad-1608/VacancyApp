@@ -6,12 +6,10 @@
         public string CompanyName { get; set; }
         public int SubCategoryId { get; set; } 
         public int EducationId { get; set; }
-        public string Person { get; set; }
-        public double MinSalary { get; set; }
-        public double MaxSalary { get; set; }
+        public double? MinSalary { get; set; }
+        public double? MaxSalary { get; set; }
         public int ExperienceId { get; set; }
         public int CityId { get; set; }
-        public int JobTypeId { get; set; }
         public string Requirements { get; set; }
         public string JobInformation { get; set; }
         public byte MinAge { get; set; }
@@ -28,7 +26,6 @@
         public SubCategory SubCategory { get; set; }
         public Education Education { get; set; }
         public Experience Experience { get; set; }
-        public JobType JobType { get; set; }
 
 
     }
